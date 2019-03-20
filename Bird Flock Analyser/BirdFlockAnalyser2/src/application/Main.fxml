@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+   <children>
+      <MenuBar layoutY="2.0" prefHeight="26.0" prefWidth="866.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#chooseImage" text="Open Image" />
+                  <MenuItem mnemonicParsing="false" onAction="#exitSystem" text="Exit Bird Flock Analyser" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit Image">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#regularImage" text="Original Image" />
+                  <MenuItem mnemonicParsing="false" onAction="#blackAndWhiteImage" text="Black and White" />
+                  <MenuItem mnemonicParsing="false" onAction="#identifyBirds" text="Identify Birds" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Pane layoutY="28.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="618.0" prefWidth="866.0">
+         <children>
+            <ImageView fx:id="imageview" fitHeight="555.0" fitWidth="658.0" layoutX="-1.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="243.0" prefHeight="59.0" prefWidth="352.0" text="Bird Flock Analyser">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Label>
+            <Button layoutX="718.0" layoutY="30.0" mnemonicParsing="false" onAction="#countTheBirds" text="Count the birds" />
+            <Label fx:id="intLabel" alignment="CENTER" layoutX="669.0" layoutY="55.0" prefHeight="100.0" prefWidth="197.0" textAlignment="CENTER" textFill="#49b76a" wrapText="true">
+               <font>
+                  <Font name="Arial" size="24.0" />
+               </font></Label>
+            <Pane fx:id="pane" layoutY="55.0" prefHeight="564.0" prefWidth="658.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
