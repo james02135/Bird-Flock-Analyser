@@ -22,9 +22,9 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
 /**
- * 
+ *
  * @author James Richardson
- * 
+ *
  * References: Class notes, Stack Overflow
  * Assistance by: Andrew Brennan, Austin Heraughty, Dylan Richards, Gianluca Zuccarelli
  *
@@ -40,10 +40,10 @@ public class MainController {
 
 	@FXML
 	TextArea textarea;
-	
+
 	@FXML
 	Label intLabel;
-	
+
 	@FXML
 	Pane pane;
 
@@ -60,7 +60,7 @@ public class MainController {
 	private Set<Integer> birds = new HashSet<>();
 	private Rectangle[] birdBoxes;
 	private Rectangle outerRec;
-	
+
 
 	public void regularImage() {// go back to the original image
 		imageview.setImage(origImage);
@@ -72,7 +72,7 @@ public class MainController {
 		imageview.setImage(BandWImage);
 		setPixelColorValue();// sets the value to either white or black
 	}
-	
+
 	public void identifyBirds() {
 		unionTheAdjacentPixels();// unions all adjacent black pixels to sets or "birds"
 	}
@@ -131,10 +131,10 @@ public class MainController {
 					DJset[dsindex] = dsindex;// set the black pixel's value to itself
 				}
 			}
-		} 
-			
+		}
+
 		}catch (ArrayIndexOutOfBoundsException boundsException) {
-			
+
 		}
 	}
 
@@ -147,13 +147,13 @@ public class MainController {
 				for (int x = 0; x < width; x++) {
 				int dsindex = (y * width) + x;// convert x and y coordinates into a single value
 					if (DJset[dsindex] != -1) {// if pixel isn't white
-						if ((DJset[dsindex + 1]%width != 0)&&(DJset[dsindex + 1] != -1)) {// if the next index doesnt wrap around, and isn't white																	
+						if ((DJset[dsindex + 1]%width != 0)&&(DJset[dsindex + 1] != -1)) {// if the next index doesnt wrap around, and isn't white
 							union(DJset, DJset[dsindex], DJset[dsindex + 1]);// union with dsindex
 						}
-						if ((DJset[dsindex + width]<DJset.length-width)&&(DJset[dsindex + width] != -1)) {// if the pixel isn't below the last line, and isn't white																
+						if ((DJset[dsindex + width]<DJset.length-width)&&(DJset[dsindex + width] != -1)) {// if the pixel isn't below the last line, and isn't white
 							union(DJset, DJset[dsindex], DJset[dsindex + width]);// union with dsindex
 						}
-					} 
+					}
 				}
 			}
 		}catch (ArrayIndexOutOfBoundsException boundsException) {
@@ -180,14 +180,14 @@ public class MainController {
 			}
 		}
 		return count;
-		
+
 	}
-	
+
 	private void noiseManagement() {// Remove small sets
 		//remove if the percentage of pixels in the set is less than 5% of the overall image size
 		birds.removeIf(b->((double) blackPixelsPerBird((int) b) / DJset.length) * 100.0 < 0.05);
 	}
-	
+
 	public void displayDSArray() {//Displays the converted pixels into the console
 		int width = (int) BandWImage.getWidth();
 		for (int i = 0; i < DJset.length; i++) {
@@ -195,9 +195,9 @@ public class MainController {
 			if(i % width == 0) {
 				System.out.println();
 			}
-		}	
+		}
 	}
-	
+
 	private void printRoot() {//console print out of all the black pixels and their respective roots
 		for (int id = 0; id < DJset.length; id++) {
 			int parent = find(DJset, id);
@@ -218,19 +218,18 @@ public class MainController {
 			id = a[id];
 		return id;
 	}
-	
+
 	public Rectangle[] getBirdBoxes() {
 		return birdBoxes;
 	}
-	
+
 	public Set<Integer> getBirds() {
 		return birds;
 	}
-	
+
 	private void createBirdBoxes() {
 		birdBoxes = new Rectangle[birds.size()];
 		int width = (int) BandWImage.getWidth();
-		int index = 0;
 		for (Iterator<Integer> iterator = birds.iterator(); iterator.hasNext();) {
 			
 			Integer element = iterator.next();
@@ -255,8 +254,7 @@ public class MainController {
 					maxY = (maxY < yLoc) ? yLoc : maxY;
 				}
 			}	
-			birdBoxes[index++] = new Rectangle(minX, minY, maxX - minX, maxY - minY);
-			pane.getChildren().addAll(birdBoxes[index++]);
+			pane.getChildren().addAll(new Rectangle(minX, minY, maxX - minX, maxY - minY));
 		}	
 	}
 
